@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
+import { Signup } from "./pages/signup";
+import { Login } from "./pages/login";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -23,11 +25,11 @@ const Layout = () => {
             <Route exact path="/">
               <Home />
             </Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
             <Route exact path="/login">
               <Login />
-            </Route>
-            <Route exact path="/register">
-              <Register />
             </Route>
             <Route>
               <h1>Not found!</h1>

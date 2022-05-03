@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-
 import "../../styles/home.css";
 
 export const Home = () => {
