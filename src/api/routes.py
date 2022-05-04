@@ -7,13 +7,17 @@ from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
+global body_email
+global body_password
+
 
 @api.route("/signup", methods=["POST"])
 def create_user():
     # las siguientes dos lineas sirven para recoger los inputs que pasamos desde frontend
     # entre comillas el parametro que queremos en nuestra api recibir desde el frontend
-    body_email: request.json.get("email")
-    body_password: request.json.get("password")
+
+    body_email = request.json.get("email")
+    body_password = request.json.get("password")
     # cuando los recibamos, si lo hacemos, vamos a crear el usuario. En caso de no recibirlo, no creamos el usuario.
     # si está email y password, creamos el usuario (new_user)
     if body_email and body_password:
