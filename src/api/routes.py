@@ -25,7 +25,11 @@ def create_user():
         db.session.add(new_user)
         db.session.commit()
         # new_user es una instancia de clase que no puede ser reenviada
-        return jsonify({"created": True, "user": new_user.serialize()}), 200
+        return jsonify({"created": True}), 200
         # a través de JSON. Por ende, tenemos que llamar a la función serialize de la propia instancia de clase
     else:
-        return jsonify({"created": False, "msg": "Missing info"}), 200
+        # Con el 400, indicamos que enviar faltando uno de los dos datos, sale un error 400 e indica missing info
+        return jsonify({"created": False, "msg": "Missing info"}), 400
+
+    # LA VALIDACIón de campos debe estar tanto en el backend como en el frontend. Y no debería siquiera hacer un envío (400) en caso de que falta algo en el campo
+    # ya no debería siquiera permitir hacer esto
