@@ -7,9 +7,6 @@ from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
-global body_email
-global body_password
-
 
 @api.route("/signup", methods=["POST"])
 def create_user():
