@@ -33,3 +33,22 @@ def create_user():
 
     # LA VALIDACIón de campos debe estar tanto en el backend como en el frontend. Y no debería siquiera hacer un envío (400) en caso de que falta algo en el campo
     # ya no debería siquiera permitir hacer esto
+
+
+@api.route("/login", methods=["POST"])
+def login_user():
+    body_email = request.json.get("email")
+    body_password = request.json.get("password")
+    if body_email and body_password:
+        # si tenemos un body email y body password, pues procedemos a buscar el usuario en nuestra base de datos. Para buscarlo hacemos lo siguiente:
+        user = User.query.filter_by(email=body_email).filter_by(
+            password=body_password).first()  # esto es con filter by
+        # si quisieramos usarlo con filter
+        # user = User.query.filter, sería como la línea de abajo (es exactamente lo mismo, de maneras distintas.)
+        #     User.email == body_email, User.password == body_password)
+        if user:
+            return jsonify({"logged": True, "user": user.serialize()}), 200
+        else:
+            return jsonify({"logged": False, "msg": "Missing info"}), 400
+    else:
+        return jsonify({"logged": False, "msg": "Missing info"}), 400

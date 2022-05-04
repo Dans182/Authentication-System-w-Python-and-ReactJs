@@ -2,10 +2,12 @@ import React, { useState } from "react";
 
 export const Login = () => {
   const [user, setUser] = useState({});
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
+  const [username, setUsername] = useState(null);
 
   const sendUserInfo = async () => {
     if (user.email != null && user.email.trim() != "") {
+      setError(null);
       const response = await fetch(
         "https://3001-4geeksacade-reactflaskh-3ai8sed950e.ws-eu43.gitpod.io/api/login",
         {
@@ -16,13 +18,25 @@ export const Login = () => {
         }
       );
       const data = await response.json();
+      if (data.logged == false) {
+        setError("Bad info");
+        setTimeout(() => {
+          setError(null);
+        }, 2000);
+      } else if (data.logged == true) {
+        setUsername(data.user.email);
+      }
     } else {
       setError("Bad info");
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
     }
   };
 
   return (
     <div className="text-center mt-5">
+      {username}
       <div className="row">
         <label htmlFor="email" className="col-1">
           Email

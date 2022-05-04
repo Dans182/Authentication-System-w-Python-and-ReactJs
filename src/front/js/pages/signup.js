@@ -5,7 +5,12 @@ export const Signup = () => {
   const [error, setError] = useState();
 
   const sendUserInfo = async () => {
-    if (user.email != null && user.email.trim() != "") {
+    if (
+      user.email != null &&
+      user.email.trim() != "" &&
+      user.password != null &&
+      user.password.trim() != ""
+    ) {
       const response = await fetch(
         "https://3001-4geeksacade-reactflaskh-3ai8sed950e.ws-eu43.gitpod.io/api/signup",
         {
@@ -18,6 +23,9 @@ export const Signup = () => {
       const data = await response.json();
     } else {
       setError("Bad info");
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
     }
   };
 
