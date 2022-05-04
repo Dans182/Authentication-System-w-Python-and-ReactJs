@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 export const Signup = () => {
   const [user, setUser] = useState({});
-
   const sendUserInfo = async () => {
     const response = await fetch(
       "https://3001-4geeksacade-reactflaskh-3ai8sed950e.ws-eu43.gitpod.io/api/signup",

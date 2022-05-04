@@ -6,7 +6,6 @@ import { Home } from "./pages/home";
 import { Signup } from "./pages/signup";
 import { Login } from "./pages/login";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
