@@ -12,7 +12,7 @@ export const Signup = () => {
       user.password.trim() != ""
     ) {
       const response = await fetch(
-        "https://3001-4geeksacade-reactflaskh-3ai8sed950e.ws-eu43.gitpod.io/api/signup",
+        "https://3001-4geeksacade-reactflaskh-3ai8sed950e.ws-eu44.gitpod.io/api/signup",
         {
           method: "POST",
           headers: { "Content-type": "application/json" },

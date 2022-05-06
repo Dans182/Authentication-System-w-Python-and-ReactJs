@@ -1,7 +1,13 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
-    store: {},
-    actions: {},
+    store: {
+      user: null,
+    },
+    actions: {
+      setStoreUser: (user) => {
+        setStoreUser({ user: user });
+      },
+    },
   };
 };
 

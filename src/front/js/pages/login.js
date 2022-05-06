@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 
 export const Login = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState(null);
   const [username, setUsername] = useState(null);
+  const { store, actions } = useContext(Context);
 
   const sendUserInfo = async () => {
     if (user.email != null && user.email.trim() != "") {
       setError(null);
       const response = await fetch(
-        "https://3001-4geeksacade-reactflaskh-3ai8sed950e.ws-eu43.gitpod.io/api/login",
+        "https://3001-4geeksacade-reactflaskh-3ai8sed950e.ws-eu44.gitpod.io/api/login",
         {
           method: "POST",
           headers: { "Content-type": "application/json" },
@@ -36,7 +38,6 @@ export const Login = () => {
 
   return (
     <div className="text-center mt-5">
-      {username}
       <div className="row">
         <label htmlFor="email" className="col-1">
           Email
@@ -60,6 +61,7 @@ export const Login = () => {
         </button>
       </div>
       {error != null ? <h3 className="text-danger">{error}</h3> : null}
+      <h1 className="text-success">{username}</h1>
     </div>
   );
 };

@@ -52,3 +52,8 @@ def login_user():
             return jsonify({"logged": False, "msg": "Missing info"}), 400
     else:
         return jsonify({"logged": False, "msg": "Missing info"}), 400
+
+
+@api.route("/planet", methods=["GET"])
+def get_planets():
+    return jsonify({"planets": ["planet1", "planet2", "planet3", "planet4"]})
