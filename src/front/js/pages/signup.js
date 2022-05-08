@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import "../../styles/home.css";
 
 export const Signup = () => {
+  const history = useHistory();
   const [user, setUser] = useState({});
   const [error, setError] = useState();
 
@@ -16,12 +19,17 @@ export const Signup = () => {
 
         {
           method: "POST",
-          headers: { "Content-type": "application/json" },
+          headers: { "Content-Type": "application/json" },
           // A través del JSON get de routes, estamos recogiendo una informacion (request.json.get)(body_email y body_password), entonces necesitamos pasarles el body tambien y al estarlo enviando desde el frontend debemos parsearlo a JSON
           body: JSON.stringify(user), //aca pasamos el user (useState User) que seria el objeto donde se guarda el email y el password
         }
       );
       const data = await response.json();
+      if (data.created) {
+        history.push("/login");
+      } else {
+        alert("ERROR");
+      }
     } else {
       setError("Bad info");
       setTimeout(() => {
@@ -32,6 +40,7 @@ export const Signup = () => {
 
   return (
     <div className="text-center mt-5">
+      <h1 className="mb-5">SIGN UP</h1>
       <div className="row">
         <label htmlFor="email" className="col-1">
           Email

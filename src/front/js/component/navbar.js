@@ -8,29 +8,29 @@ export const Navbar = () => {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container">
-        <Link to="/">
-          <span className="navbar-brand mb-0 h1">React Boilerplate</span>
+        <Link to="/" className="" style={{ color: "black" }}>
+          <span className="navbar-brand mb-0 h1 text-sucess">HOME</span>
         </Link>
         {store.user == null ? (
           <div className="ml-auto">
-            <Link to="/signup">
-              <button className="btn btn-primary me-3">Sign Up</button>
+            <Link to="/login" className="me-3">
+              <button className="btn btn-primary">Login</button>
             </Link>
-            <Link to="/login">
-              <button className="btn btn-secondary">Login</button>
+            <Link to="/signup">
+              <button className="btn btn-success">Sign up</button>
             </Link>
           </div>
         ) : (
           <div className="ml-auto">
-            <Link to="/">
+            <Link to="/protected">
               <button
-                className="btn btn-primary me-3"
+                className="btn btn-secondary"
                 onClick={() => {
-                  localStorage.removeItem("token");
+                  localStorage.clear();
                   actions.setStoreUser(null);
                 }}
               >
-                Logout
+                Log out
               </button>
             </Link>
           </div>

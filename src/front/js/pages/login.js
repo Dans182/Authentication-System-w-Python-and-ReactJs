@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
+import { useHistory } from "react-router-dom";
 
 export const Login = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState(null);
   const [username, setUsername] = useState(null);
+  const { store, actions } = useContext(Context);
+  let history = useHistory();
 
   const sendUserInfo = async () => {
     if (user.email != null && user.email.trim() != "") {
@@ -13,12 +16,20 @@ export const Login = () => {
         "https://3001-4geeksacade-reactflaskh-3ai8sed950e.ws-eu44.gitpod.io/api/login",
         {
           method: "POST",
-          headers: { "Content-type": "application/json" },
+          headers: { "Content-Type": "application/json" },
           // A través del JSON get de routes, estamos recogiendo una informacion (request.json.get)(body_email y body_password), entonces necesitamos pasarles el body tambien y al estarlo enviando desde el frontend debemos parsearlo a JSON
           body: JSON.stringify(user), //aca pasamos el user (useState User) que seria el objeto donde se guarda el email y el password
         }
       );
       const data = await response.json();
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        actions.verify();
+        history.push("/protected");
+      } else {
+        alert("ERROR");
+      }
+
       if (data.logged == false) {
         setError("Bad info");
         setTimeout(() => {
@@ -42,6 +53,7 @@ export const Login = () => {
 
   return (
     <div className="text-center mt-5">
+      <h1 className="mb-5">LOGIN</h1>
       <div className="row">
         <label htmlFor="email" className="col-1">
           Email

@@ -52,17 +52,25 @@ def login_user():
             access_token = create_access_token(identity=user.id)
             return jsonify({"logged": True, "token": access_token, "user": user.serialize()}), 200
         else:
-            return jsonify({"logged": False, "msg": "Missing info"}), 400
+            return jsonify({"logged": False, "msg": "Missing info"}), 401
     else:
-        return jsonify({"logged": False, "msg": "Missing info"}), 400
+        return jsonify({"logged": False, "msg": "Missing info"}), 401
 
 
-@api.route("/planet", methods=["GET"])
+@api.route("/protected", methods=["GET"])
 @jwt_required()
-def get_planets():
+def get_protected_info():
     current_user_id = get_jwt_identity()
     user = User.query.get(current_user_id)
     if user:
-        return jsonify({"planets": ["planet1", "planet2", "planet3", "planet4"]})
+        return jsonify({"planets": ["planet1", "planet2", "planet3", "planet4"]}), 200
     else:
         return jsonify({"msg": "Not authorized"}), 400
+
+
+@api.route("/user", methods=["GET"])
+@jwt_required()
+def get_user():
+    current_user_id = get_jwt_identity()
+    user = User.query.get(current_user_id)
+    return jsonify({"user": user.serialize()}), 200
