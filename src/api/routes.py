@@ -60,4 +60,9 @@ def login_user():
 @api.route("/planet", methods=["GET"])
 @jwt_required()
 def get_planets():
-    return jsonify({"planets": ["planet1", "planet2", "planet3", "planet4"]})
+    current_user_id = get_jwt_identity()
+    user = User.query.get(current_user_id)
+    if user:
+        return jsonify({"planets": ["planet1", "planet2", "planet3", "planet4"]})
+    else:
+        return jsonify({"msg": "Not authorized"}), 400
