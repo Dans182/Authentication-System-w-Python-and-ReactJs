@@ -15,8 +15,7 @@ export const Home = () => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "Bearer KASLÑDKASLÑDKASLÑDKLASÑDKLÑASFSADLFÑKSDLFKSLÑDKFLÑSDKFKSLÑDFKÑSLDFKLÑSDMFASDMF.ASDLAFÑKLSDKFLASKDFLAÑAAKSDLFÑAKSDFÑLSDLKLFÑ",
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
@@ -33,7 +32,7 @@ export const Home = () => {
     <div className="text-center mt-5">
       <h1>Private view</h1>
       {planets.map((planet, i) => {
-        return <h1 hey={i}>{planet}</h1>;
+        return <h1 key={i}>{planet}</h1>;
       })}
       <h1>{error}</h1>
     </div>

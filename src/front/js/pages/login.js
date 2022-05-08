@@ -26,7 +26,11 @@ export const Login = () => {
         }, 2000);
       } else if (data.logged == true) {
         setUsername(data.user.email);
-        localStorage.setItem("token", data.token); //con esta linea de codigo guardamos el token en localStorage
+        localStorage.setItem("token", data.token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ user: { name: "m2", sur: "n" } })
+        ); //con esta linea de codigo guardamos el token en localStorage
       }
     } else {
       setError("Bad info");
