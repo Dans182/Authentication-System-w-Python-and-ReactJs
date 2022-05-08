@@ -22,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ logged: false });
         }
       },
+
       logout: async () => {
         localStorage.clear();
         setStore({ logged: false });
