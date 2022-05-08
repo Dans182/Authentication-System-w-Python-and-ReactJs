@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Context } from "../store/appContext";
 
 export const Login = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState(null);
   const [username, setUsername] = useState(null);
-  const { store, actions } = useContext(Context);
 
   const sendUserInfo = async () => {
     if (user.email != null && user.email.trim() != "") {
@@ -27,6 +26,7 @@ export const Login = () => {
         }, 2000);
       } else if (data.logged == true) {
         setUsername(data.user.email);
+        localStorage.setItem("token", data.token); //con esta linea de codigo guardamos el token en localStorage
       }
     } else {
       setError("Bad info");
